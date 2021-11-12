@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import {req} from "../api/api";
+import {req} from "../../api/api";
 
 export default {
   name: "CourseList",

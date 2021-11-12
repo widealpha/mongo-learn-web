@@ -16,36 +16,34 @@
           <el-menu-item index="studentList">学生</el-menu-item>
           <el-menu-item index="teacherList">教师信息</el-menu-item>
           <el-menu-item index="courseList">课程信息</el-menu-item>
-          <el-menu-item index="chooseCourse">选课管理</el-menu-item>
         </el-submenu>
         <el-submenu index="2">
           <template slot="title">
             <i class="el-icon-menu" v-if="chooseIndex === '2'" style="color: dodgerblue"></i>
             <i class="el-icon-menu" v-else></i>
-            <span slot="title">实验二</span>
+            <span slot="title">实验三</span>
           </template>
           <el-menu-item index="uploadExcel">上传excel数据</el-menu-item>
-          <el-menu-item index="2-2">添加信息</el-menu-item>
-          <el-menu-item index="2-3">已修课程</el-menu-item>
+          <el-menu-item index="addStudent">添加学生信息</el-menu-item>
+          <el-menu-item index="addTeacher">添加教师信息</el-menu-item>
+          <el-menu-item index="addCourse">添加课程信息</el-menu-item>
         </el-submenu>
         <el-submenu index="3">
           <template slot="title">
             <i class="el-icon-data-line" v-if="chooseIndex === '3'" style="color: dodgerblue"></i>
             <i class="el-icon-data-line" v-else></i>
-            <span slot="title">实验三</span>
+            <span slot="title">实验五</span>
           </template>
-          <el-menu-item index="3-1">修改信息</el-menu-item>
-          <el-menu-item index="3-2">选课成绩</el-menu-item>
+          <el-menu-item index="chooseCourse">选课管理</el-menu-item>
         </el-submenu>
         <el-submenu index="4">
           <template slot="title">
             <i class="el-icon-document" v-if="chooseIndex === '4'" style="color: dodgerblue"></i>
             <i class="el-icon-document" v-else></i>
-            <span slot="title">实验四</span>
+            <span slot="title">实验六</span>
           </template>
-          <el-menu-item index="4-2">奖项查询</el-menu-item>
-          <el-menu-item index="4-3">惩罚查询</el-menu-item>
-          <el-menu-item index="4-1">实践成果</el-menu-item>
+          <el-menu-item index="top10Students">排名前十学生信息</el-menu-item>
+          <el-menu-item index="top10CourseStudents">选课数目前十学生</el-menu-item>
         </el-submenu>
       </el-menu>
     </el-aside>

@@ -33,7 +33,6 @@
     </el-input>
     <el-table
         :data="tableData"
-        height="250"
         border
         style="width: 100%">
       <el-table-column
@@ -57,6 +56,13 @@
       <el-table-column
           prop="score"
           label="成绩">
+        <template slot-scope="scope">
+          <el-input v-if="scope.row.canEdit" v-model="scope.row.score" style="height: 100%; width: 60%;"
+                    @focusout="focusRelease(scope.row)"
+          >{{ scope.row.score }}
+          </el-input>
+          <span v-else>{{ scope.row.score }}</span>
+        </template>
       </el-table-column>
       <el-table-column
           fixed="right"
@@ -72,38 +78,42 @@
 </template>
 
 <script>
-import {req} from "../api/api";
+import {req} from "../../api/api";
 
 export default {
   name: "CourseList",
   data() {
     return {
       dialogShow: false,
-      selectSid: '200800020101',
+      selectSid: '200900130985',
       cid: '300001',
       editData: {},
-      value: 'allCourses',
+      value: 'studentChooseCourse',
       options: [
         {
           value: "allCourses",
           label: "全部课程"
-        },
-        {
-          value: "findCourseWithFcid",
-          label: "先行课号为“300001”的课程名"
-        },
+        }
       ],
-      tableData: []
+      tableData: [],
+      showEdit: []
     }
   },
   methods: {
     submit() {
-      req('GET', this.value).then((res) => {
+      if (this.selectSid == null) {
+        this.selectSid = '200900130985'
+      }
+      req('POST', 'studentChooseCourse', {'sid': this.selectSid}).then((res) => {
         this.tableData = res
+        this.tableData.forEach((m) => m['canEdit'] = false)
       })
     },
     selectChooseCourses() {
-      req('POST', 'studentChooseCourse', {'sid': this.selectSid}).then((res) => this.tableData = res)
+      req('POST', 'studentChooseCourse', {'sid': this.selectSid}).then((res) => {
+        this.tableData = res
+        this.showEdit.fill(false, 0, res.size())
+      })
     },
     chooseCourse() {
       req('POST', 'studentChooseCourse', {
@@ -112,8 +122,15 @@ export default {
       }).then(() => this.selectChooseCourses())
     },
     edit(data) {
+      data.canEdit = true
+      console.log(data)
+      if (data.score == null){
+        data.score = 0.0
+      } else {
+        data.score = data.score + 1
+        data.score = data.score - 1
+      }
       this.editData = data
-      this.dialogShow = true
     },
     submitUpdate() {
       req('POST', 'updateScore', {
@@ -127,6 +144,12 @@ export default {
         'sid': this.selectSid,
         'cid': data['cid']
       }).then(() => this.selectChooseCourses())
+    },
+    focusRelease(data) {
+      data.canEdit = false;
+      if (data.score === 0 || data.score.isEmpty()) {
+        data.remove('score')
+      }
     }
   },
   mounted() {

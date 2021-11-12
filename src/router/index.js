@@ -7,12 +7,17 @@ import Main from '../views/Main';
  * 基础菜单
  */
 // 课程管理
-import StudentList from '../views/StudentList';
+import StudentList from '../views/ex4/StudentList';
 import Login from "../views/Login";
-import TeacherList from "../views/TeacherList";
-import CourseList from "../views/CourseList";
-import UploadExcel from "../views/UploadExcel";
-import ChooseCourse from "../views/ChooseCourse";
+import TeacherList from "../views/ex4/TeacherList";
+import CourseList from "../views/ex4/CourseList";
+import UploadExcel from "../views/ex3/UploadExcel";
+import ChooseCourse from "../views/ex5/ChooseCourse";
+import AddCourse from "../views/ex3/AddCourse"
+import AddTeacher from "../views/ex3/AddTeacher"
+import AddStudent from "../views/ex3/AddStudent"
+import Top10Students from "../views/ex6/Top10Students";
+import Top10CourseStudents from "../views/ex6/Top10CourseStudents";
 
 // 启用路由
 Vue.use(Router);
@@ -51,6 +56,26 @@ export default new Router({
                 path: 'chooseCourse',
                 name: '上传信息',
                 component: ChooseCourse,
+            }, {
+                path: 'addCourse',
+                name: '添加课程',
+                component: AddCourse,
+            }, {
+                path: 'addTeacher',
+                name: '添加教师',
+                component: AddTeacher,
+            }, {
+                path: 'addStudent',
+                name: '添加学生',
+                component: AddStudent,
+            }, {
+                path: 'top10Students',
+                name: '添加学生',
+                component: Top10Students,
+            }, {
+                path: 'top10CourseStudents',
+                name: '添加学生',
+                component: Top10CourseStudents,
             }
             ]
         }]
